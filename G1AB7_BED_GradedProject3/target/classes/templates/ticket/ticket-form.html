@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
+	referrerpolicy="origin"></script>
+<script src='tinymce/tinymce.min.js'></script>
+<script>
+	tinymce.init({
+		selector : '#myTextArea'
+	});
+</script>
+
+<title>Edit Ticket</title>
+</head>
+
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<a class="navbar-brand" th:href="@{/tickets/list}">Ticket Tracker
+			Application</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item "><a class="nav-link"
+					th:href="@{/tickets/list}">Tickets <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item"><a class="nav-link"
+					th:href="@{/tickets/addTicket}">New Ticket</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="container">
+		<br>
+		<br>
+		<h3>Edit Ticket</h3>
+		<hr>
+		<form th:action="@{/tickets/save}" th:object="${ticket}"
+			method="POST">
+
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+			<p class="h5 mb-4">Title</p>
+			<input type="text" th:field="*{title}"
+				class="form-control mb-4 col-12" placeholder="Title" required = "required">
+			<p class="h5 mb-4">Description</p>
+			<div class="form-group">
+				<label for="exampleFormControlTextarea1"></label>
+				<textarea class="form-control" id="exampleFormControlTextarea1"
+					rows="3" th:field="*{description}" placeholder="Description" required = "required"></textarea>
+			</div>
+			<p class="h5 mb-4">Content</p>
+			<textarea id="myTextArea" th:field="*{content}"
+				placeholder="Enter Content"></textarea>
+			<br> 
+			<button type="submit" class="btn btn-info col-2">Submit</button>
+		</form>
+		<hr>
+	</div>
+</body>
+
+</html>
